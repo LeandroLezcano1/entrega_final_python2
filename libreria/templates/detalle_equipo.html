@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block titulo %} Detalle de Equipo {% endblock %}
+{% block contenido %}
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">{{ equipo.nombre }}</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{ equipo.escudo.url }}" class="img-fluid" alt="Escudo del {{ equipo.nombre }}">
+            </div>
+            <div class="col-md-8">
+                <p>{{ equipo.descripcion }}</p>
+                <hr>
+                <h5>Comentarios</h5>
+                <form method="POST" action="{% url 'crear_comentario' equipo.id %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <textarea class="form-control" name="texto" placeholder="Escribe un comentario..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Comentar</button>
+               </form>
+                {% for comentario in comentarios %}
+                <div class="media mt-3">
+                    <img src="{{ comentario.autor.imagen_perfil.url }}" class="mr-3 rounded-circle" width="50">
+                    <div class="media-body">
+                        <h6 class="mt-0">{{ comentario.autor.username }}</h6>
+                        {{ comentario.texto }}
+                    </div>
+                </div>
+                {% empty %}
+                <p>No hay comentarios aún.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

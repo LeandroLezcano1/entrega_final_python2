@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block titulo %} AGREGAR NUEVO EQUIPO {% endblock %}
+
+{% block contenido %} 
+
+<div class="card">
+    <div class="card-header">
+        Agregar equipo
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">Equipo</h4>
+       
+        {% include 'form.html' %}
+
+    </div>
+   
+</div>
+
+{% endblock %}
